@@ -517,6 +517,74 @@ end)
                 Shape = [==[Block]==],
                 TopSurface = [==[Smooth]==]
             },
+            {
+                {
+                    PlaybackSpeed = 1,
+                    Volume = 0.20000000298023224,
+                    Name = [==[Victory]==],
+                    ClassName = [==[Sound]==],
+                    SoundId = [==[rbxasset://sounds/victory.wav]==],
+                    RollOffMaxDistance = 10000,
+                    RollOffMode = [==[Inverse]==],
+                    RollOffMinDistance = 10
+                },
+                {
+                    Disabled = false,
+                    Source = [==[-- declarations
+
+local head = script.Parent
+local sound = head:findFirstChild("Victory")
+
+function onTouched(part)
+	print("PART:", part)
+	local h = part.Parent:findFirstChild("Humanoid")
+	print("HUMANOID:", h)
+	if h~=nil then
+sound:play()
+if part.Parent:findFirstChild("Head"):findFirstChild("face").Texture == nil then return end
+part.Parent:findFirstChild("Head"):findFirstChild("face").Texture=script.Parent.Decal.Texture
+	end
+end
+
+script.Parent.Touched:connect(onTouched)]==],
+                    Name = [==[Script]==],
+                    ClassName = [==[Script]==]
+                },
+                {
+                    Transparency = 0,
+                    Name = [==[Decal]==],
+                    ClassName = [==[Decal]==],
+                    Face = [==[Front]==],
+                    Color3 = Color3.new(1, 1, 1),
+                    Texture = [==[http://www.roblox.com/asset/?id=3868600]==]
+                },
+                RightParamA = 0,
+                Reflectance = 0,
+                Color = Color3.new(0.960784, 0.803922, 0.188235),
+                CFrame = CFrame.new(-114.846001, 8, 0.310998917, 0, 0, -1, 0, 1, 0, 1, 0, 0),
+                RightSurface = [==[Smooth]==],
+                RotVelocity = Vector3.new(0, 0, 0),
+                Velocity = Vector3.new(0, 0, 0),
+                Material = [==[Plastic]==],
+                Anchored = true,
+                Size = Vector3.new(6, 6, 1),
+                Friction = 0.30000001192092896,
+                FrontSurface = [==[Smooth]==],
+                RightSurfaceInput = [==[NoInput]==],
+                CanCollide = true,
+                BackSurface = [==[Smooth]==],
+                BottomSurface = [==[Inlet]==],
+                LeftSurfaceInput = [==[NoInput]==],
+                LeftSurface = [==[Smooth]==],
+                Elasticity = 0.5,
+                Transparency = 0,
+                Name = [==[Face Changer]==],
+                ClassName = [==[Part]==],
+                Orientation = Vector3.new(0, -90, 0),
+                LeftParamA = 0,
+                Shape = [==[Block]==],
+                TopSurface = [==[Smooth]==]
+            },
             Name = [==[Workspace]==],
             ClassName = [==[Workspace]==]
         },
