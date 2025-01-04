@@ -1,4 +1,4 @@
-return {
+{
     {
         {
             {
@@ -26806,6 +26806,1901 @@ script.Parent.Touched:connect(onTouched)]==],
         {
             Name = [==[Folder]==],
             ClassName = [==[Folder]==]
+        },
+        {
+            {
+                {
+                    {
+                        PlaybackSpeed = 1,
+                        Volume = 1,
+                        Name = [==[Fire]==],
+                        ClassName = [==[Sound]==],
+                        SoundId = [==[]==],
+                        RollOffMaxDistance = 10000,
+                        RollOffMode = [==[Inverse]==],
+                        RollOffMinDistance = 10
+                    },
+                    {
+                        Offset = Vector3.new(0, 0, 0),
+                        VertexColor = Vector3.new(1, 1, 1),
+                        Name = [==[Mesh]==],
+                        ClassName = [==[SpecialMesh]==],
+                        Scale = Vector3.new(0.02500000037252903, 0.02500000037252903, 0.02500000037252903),
+                        MeshId = [==[]==],
+                        MeshType = [==[FileMesh]==],
+                        TextureId = [==[]==]
+                    },
+                    RightParamA = -0.5,
+                    Reflectance = 0,
+                    Color = Color3.new(0.388235, 0.372549, 0.384314),
+                    Velocity = Vector3.new(0, 0, 0),
+                    RightSurface = [==[Smooth]==],
+                    RotVelocity = Vector3.new(0, 0, 0),
+                    Material = [==[Plastic]==],
+                    CFrame = CFrame.new(-108.883759, 0.891135693, -185.253525, 0.00033091096, 0.496437877, 0.868072212, 0.99999994, -0.000352244329, -0.000179758659, 0.000216534492, 0.868072152, -0.496437967),
+                    Size = Vector3.new(1, 0.800000011920929, 4),
+                    Friction = 0.30000001192092896,
+                    FrontSurface = [==[Smooth]==],
+                    BottomSurface = [==[Smooth]==],
+                    CanCollide = true,
+                    BackSurface = [==[Smooth]==],
+                    RightSurfaceInput = [==[NoInput]==],
+                    LeftSurfaceInput = [==[NoInput]==],
+                    LeftSurface = [==[Smooth]==],
+                    Elasticity = 0.5,
+                    Transparency = 0,
+                    Name = [==[Handle]==],
+                    ClassName = [==[Part]==],
+                    Orientation = Vector3.new(0.009999999776482582, 119.76499938964844, 90.0199966430664),
+                    LeftParamA = -0.5,
+                    Shape = [==[Block]==],
+                    TopSurface = [==[Smooth]==]
+                },
+                {
+                    Disabled = false,
+                    Source = [==[Tool = script.Parent
+
+colors = {226,24,}
+
+function fire(v)
+
+	Tool.Handle.Fire:play()
+	
+
+	local vCharacter = Tool.Parent
+	local vPlayer = game.Players:playerFromCharacter(vCharacter)
+
+	local missile = Instance.new("Part")
+
+        
+
+	local spawnPos = vCharacter.PrimaryPart.Position
+	
+
+
+	spawnPos  = spawnPos + (v * 8)
+
+	missile.Position = spawnPos
+	missile.Size = Vector3.new(0.2,0.2,0.2)
+	missile.Velocity = v * 1000
+	missile.BrickColor = BrickColor.new(colors[math.random(1, #colors)])
+	missile.Shape = 0
+	missile.BottomSurface = 0
+	missile.TopSurface = 0
+	missile.Name = "Paintball"
+	missile.Elasticity = 0
+	missile.Reflectance = 0
+	missile.Friction = 1
+	
+
+	local force = Instance.new("BodyForce")
+	force.force = Vector3.new(0,220,0)
+	force.Parent = missile
+	
+	Tool.BrickCleanup:clone().Parent = missile
+
+	local new_script = script.Parent.Paintball:clone()
+	new_script.Disabled = false
+	new_script.Parent = missile
+
+	local creator_tag = Instance.new("ObjectValue")
+	creator_tag.Value = vPlayer
+	creator_tag.Name = "creator"
+	creator_tag.Parent = missile
+	
+
+
+	missile.Parent = game.Workspace
+	--wait(0.05)
+	--fire(
+	
+
+end
+
+
+function check(en)
+---------------------------------------Function start here.
+if (Tool.Enabled == false) then
+return false
+end--end for if!
+-------------------------------
+if (Tool.Enabled == true) then
+return true
+end
+---------------------------------------Function end here.
+end
+
+
+Tool.Enabled = true
+function onActivated()
+
+	if not Tool.Enabled then
+		return
+	end
+
+	--Tool.Enabled = false
+
+	local character = Tool.Parent;
+	local humanoid = character.Humanoid
+	if humanoid == nil then
+		print("Humanoid not found")
+		return 
+	end
+
+	local targetPos = humanoid.TargetPoint
+	local lookAt = (targetPos - character.Head.Position).unit
+	
+	if (check()) then
+	fire(lookAt)
+	wait(0.1)
+	onActivated()
+	end
+	return
+
+	--Tool.Enabled = true
+end
+
+
+script.Parent.Activated:connect(onActivated)
+]==],
+                    Name = [==[PaintballShooter]==],
+                    ClassName = [==[Script]==]
+                },
+                {
+                    Disabled = false,
+                    Source = [==[ball = script.Parent
+damage = 5
+
+
+
+function onTouched(hit)
+	local humanoid = hit.Parent:findFirstChild("Humanoid")
+	-- make a splat
+	--for i=1,3 do
+	--	local s = Instance.new("Part")
+	--	s.Shape = 1 -- block
+	--	s.formFactor = 2 -- plate
+	--	s.Size = Vector3.new(1,.4,1)
+	--	s.BrickColor = ball.BrickColor
+	--	local v = Vector3.new(math.random(-1,1), math.random(0,1), math.random(-1,1))
+	--	s.Velocity = 15 * v--15
+	--	s.CFrame = CFrame.new(ball.Position + v, v)
+	---	ball.BrickCleanup:clone().Parent = s
+	--	s.BrickCleanup.Disabled = false
+	--	s.Parent = game.Workspace
+	--	
+	--end
+	
+
+	if humanoid ~= nil then
+		tagHumanoid(humanoid)
+		humanoid.Health = humanoid.Health - damage
+		wait(2)
+		untagHumanoid(humanoid)
+	end
+
+	connection:disconnect()
+	ball.Parent = nil
+end
+
+function tagHumanoid(humanoid)
+	-- todo: make tag expire
+	local tag = ball:findFirstChild("creator")
+	if tag ~= nil then
+		local new_tag = tag:clone()
+		new_tag.Parent = humanoid
+	end
+end
+
+
+function untagHumanoid(humanoid)
+	if humanoid ~= nil then
+		local tag = humanoid:findFirstChild("creator")
+		if tag ~= nil then
+			tag.Parent = nil
+		end
+	end
+end
+
+connection = ball.Touched:connect(onTouched)
+
+wait(8)
+ball.Parent = nil
+]==],
+                    Name = [==[Paintball]==],
+                    ClassName = [==[Script]==]
+                },
+                {
+                    Disabled = true,
+                    Source = [==[]==],
+                    Name = [==[BrickCleanup]==],
+                    ClassName = [==[Script]==]
+                },
+                Grip = CFrame.new(0, -0.5, -1.29999995, -1, 0, 0, 0, 1, 0, 0, 0, -1),
+                CanBeDropped = true,
+                ClassName = [==[Tool]==],
+                RequiresHandle = true,
+                ToolTip = [==[]==],
+                Name = [==[AK-47]==],
+                TextureId = [==[]==]
+            },
+            {
+                {
+                    Disabled = false,
+                    Source = [==[]==],
+                    Name = [==[SwordScript]==],
+                    ClassName = [==[Script]==]
+                },
+                {
+                    {
+                        Offset = Vector3.new(0, 0, 0),
+                        VertexColor = Vector3.new(1, 1, 1),
+                        Name = [==[Mesh]==],
+                        ClassName = [==[SpecialMesh]==],
+                        Scale = Vector3.new(0.699999988079071, 0.5, 0.5),
+                        MeshId = [==[rbxasset://fonts/sword.mesh]==],
+                        MeshType = [==[FileMesh]==],
+                        TextureId = [==[rbxasset://textures/SwordTexture.png]==]
+                    },
+                    RightParamA = -0.5,
+                    Reflectance = 0.4000000059604645,
+                    Color = Color3.new(0.388235, 0.372549, 0.384314),
+                    CFrame = CFrame.new(29.4997463, 0.800000787, -18.9999886, -3.26636837e-05, 4.31581502e-05, -1, 9.29513244e-10, 1, 4.31581502e-05, 0.99999994, 4.80190998e-10, -3.26636873e-05),
+                    RightSurface = [==[Smooth]==],
+                    RotVelocity = Vector3.new(0, 0, 0),
+                    Material = [==[Plastic]==],
+                    Velocity = Vector3.new(0, 0, 0),
+                    Size = Vector3.new(1, 0.800000011920929, 2),
+                    Friction = 0.30000001192092896,
+                    BackSurface = [==[Smooth]==],
+                    RightSurfaceInput = [==[NoInput]==],
+                    CanCollide = true,
+                    FrontSurface = [==[Smooth]==],
+                    BottomSurface = [==[Smooth]==],
+                    LeftSurfaceInput = [==[NoInput]==],
+                    LeftSurface = [==[Smooth]==],
+                    Elasticity = 0.5,
+                    Transparency = 0,
+                    Name = [==[Handle]==],
+                    ClassName = [==[Part]==],
+                    Orientation = Vector3.new(-0.0020000000949949026, -90.00199890136719, 0),
+                    LeftParamA = -0.5,
+                    Shape = [==[Block]==],
+                    TopSurface = [==[Smooth]==]
+                },
+                Grip = CFrame.new(0, 0, -1.5, 0, 0, 1, 1, 0, 0, 0, 1, 0),
+                Name = [==[Dagger]==],
+                ClassName = [==[Tool]==],
+                RequiresHandle = true,
+                ToolTip = [==[]==],
+                CanBeDropped = true,
+                TextureId = [==[rbxasset://Textures/Sword128.png]==]
+            },
+            {
+                {
+                    PlaybackSpeed = 1,
+                    Volume = 1,
+                    Name = [==[Explosion]==],
+                    ClassName = [==[Sound]==],
+                    SoundId = [==[rbxasset://sounds/collide.wav]==],
+                    RollOffMaxDistance = 10000,
+                    RollOffMode = [==[Inverse]==],
+                    RollOffMinDistance = 10
+                },
+                {
+                    RollOffMode = [==[Inverse]==],
+                    Looped = true,
+                    PlaybackSpeed = 1,
+                    Name = [==[Swoosh]==],
+                    Volume = 0.699999988079071,
+                    SoundId = [==[rbxasset://sounds/Rocket whoosh 01.wav]==],
+                    ClassName = [==[Sound]==],
+                    RollOffMaxDistance = 10000,
+                    RollOffMinDistance = 10
+                },
+                {
+                    RightParamA = -0.5,
+                    Reflectance = 0,
+                    Color = Color3.new(0.388235, 0.372549, 0.384314),
+                    Velocity = Vector3.new(0, 0, 0),
+                    RightSurface = [==[Smooth]==],
+                    RotVelocity = Vector3.new(0, 0, 0),
+                    Material = [==[Plastic]==],
+                    FrontSurface = [==[Smooth]==],
+                    Size = Vector3.new(4, 0.800000011920929, 1),
+                    Friction = 0.30000001192092896,
+                    BackSurface = [==[Smooth]==],
+                    BottomSurface = [==[Smooth]==],
+                    CanCollide = true,
+                    LeftSurfaceInput = [==[NoInput]==],
+                    RightSurfaceInput = [==[NoInput]==],
+                    CFrame = CFrame.new(-194, 4.5, 608.400024, -1, 0, 0, 0, 0, 1, 0, 1, -0),
+                    LeftSurface = [==[Smooth]==],
+                    Elasticity = 0.5,
+                    Transparency = 0,
+                    Name = [==[Handle]==],
+                    ClassName = [==[Part]==],
+                    Orientation = Vector3.new(-90, 180, 0),
+                    LeftParamA = -0.5,
+                    Shape = [==[Block]==],
+                    TopSurface = [==[Smooth]==]
+                },
+                {
+                    Disabled = false,
+                    Source = [==[r = game:service("RunService")
+
+shaft = script.Parent
+position = shaft.Position
+
+script.Parent.Explosion.PlayOnRemove = true -- play explosion sound when projectile removed from game
+
+function fly()
+	direction = shaft.CFrame.lookVector 
+	position = position  + direction * 20
+	error = position - shaft.Position
+	shaft.Velocity = 7*error
+end
+
+function blow()
+	swoosh:stop()
+	explosion = Instance.new("Explosion")
+	explosion.Position = shaft.Position
+
+
+	-- find instigator tag
+	local creator = script.Parent:findFirstChild("creator")
+	if creator ~= nil then
+		explosion.Hit:connect(function(part, distance)  onPlayerBlownUp(part, distance, creator) end)
+	end
+
+	explosion.Parent = game.Workspace
+	connection:disconnect()
+	wait(.1)
+	shaft:remove()
+end
+
+function onPlayerBlownUp(part, distance, creator)
+	
+	if part.Name == "Head" then
+	
+		local humanoid = part.Parent.Humanoid
+		tagHumanoid(humanoid, creator)
+	end
+end
+
+function tagHumanoid(humanoid, creator)
+	-- tag does not need to expire iff all explosions lethal
+	
+	if creator ~= nil then
+		local new_tag = creator:clone()
+		new_tag.Parent = humanoid
+		
+	end
+end
+
+function untagHumanoid(humanoid)
+	if humanoid ~= nil then
+		local tag = humanoid:findFirstChild("creator")
+		if tag ~= nil then
+		
+			tag.Parent = nil
+		end
+	end
+end
+
+t, s = r.Stepped:wait()
+
+swoosh = script.Parent.Swoosh
+swoosh:play()
+
+d = t + 10.0 - s
+connection = shaft.Touched:connect(blow)
+
+while t < d do
+	fly()
+	t = r.Stepped:wait()
+end
+
+-- at max range
+script.Parent.Explosion.PlayOnRemove = false
+swoosh:stop()
+shaft:remove()
+]==],
+                    Name = [==[RocketScript]==],
+                    ClassName = [==[Script]==]
+                },
+                {
+                    Disabled = false,
+                    Source = [==[local Rocket = Instance.new("Part")
+local Tool = script.Parent
+
+Rocket.Locked = true
+Rocket.BackSurface = 3
+Rocket.BottomSurface = 3
+Rocket.FrontSurface = 3
+Rocket.LeftSurface = 3
+Rocket.RightSurface = 3
+Rocket.TopSurface = 3
+Rocket.Size = Vector3.new(1,1,4)
+Rocket.BrickColor = BrickColor.new(23)
+
+
+Tool.RocketScript:clone().Parent = Rocket
+Tool.Explosion:clone().Parent = Rocket
+Tool.Swoosh:clone().Parent = Rocket
+
+
+function fire(vTarget)
+
+	local vCharacter = Tool.Parent;
+	
+	local vHandle = Tool:findFirstChild("Handle")
+	if vHandle == nil then
+		print("Handle not found")
+		return 
+	end
+
+	local dir = vTarget - vHandle.Position
+
+	dir = computeDirection(dir)
+
+	local missile = Rocket:clone()
+
+	local pos = vHandle.Position + (dir * 6)
+	
+	--missile.Position = pos
+	missile.CFrame = CFrame.new(pos,  pos + dir)
+
+	local creator_tag = Instance.new("ObjectValue")
+
+	local vPlayer = game.Players:playerFromCharacter(vCharacter)
+
+	if vPlayer == nil then
+		print("Player not found")
+	else
+		if (vPlayer.Neutral == false) then -- nice touch
+			missile.BrickColor = vPlayer.TeamColor
+		end
+	end
+
+	creator_tag.Value =vPlayer
+	creator_tag.Name = "creator"
+	creator_tag.Parent = missile
+	
+	missile.RocketScript.Disabled = false
+
+	missile.Parent = game.Workspace
+end
+
+function computeDirection(vec)
+	local lenSquared = vec.magnitude * vec.magnitude
+	local invSqrt = 1 / math.sqrt(lenSquared)
+	return Vector3.new(vec.x * invSqrt, vec.y * invSqrt, vec.z * invSqrt)
+end
+
+Tool.Enabled = true
+function onActivated()
+	if not Tool.Enabled then
+		return
+	end
+
+	Tool.Enabled = false
+
+	local character = Tool.Parent;
+	local humanoid = character.Humanoid
+	if humanoid == nil then
+		print("Humanoid not found")
+		return 
+	end
+
+	local targetPos = humanoid.TargetPoint
+
+	fire(targetPos)
+
+	wait(4.5)
+
+	Tool.Enabled = true
+end
+
+
+script.Parent.Activated:connect(onActivated)
+
+]==],
+                    Name = [==[Server Launcher]==],
+                    ClassName = [==[Script]==]
+                },
+                {
+                    Offset = Vector3.new(0, 0, 0),
+                    VertexColor = Vector3.new(1, 1, 1),
+                    Name = [==[Mesh]==],
+                    ClassName = [==[SpecialMesh]==],
+                    Scale = Vector3.new(1.100000023841858, 1.1399999856948853, 1.1799999475479126),
+                    MeshId = [==[http://roblox.com/asset/?id=2251534]==],
+                    MeshType = [==[FileMesh]==],
+                    TextureId = [==[]==]
+                },
+                Grip = CFrame.new(-1, -0.75, 0.25, 0, 0, 1, 0, 1, -0, -1, 0, 0),
+                Name = [==[FastRocket]==],
+                ClassName = [==[Tool]==],
+                RequiresHandle = true,
+                ToolTip = [==[]==],
+                CanBeDropped = true,
+                TextureId = [==[rbxasset://Textures/Rocket.png]==]
+            },
+            {
+                {
+                    {
+                        P = 1250,
+                        Name = [==[BodyVelocity]==],
+                        ClassName = [==[BodyVelocity]==],
+                        Velocity = Vector3.new(0, -10, 0),
+                        MaxForce = Vector3.new(0, 99999, 0)
+                    },
+                    {
+                        Offset = Vector3.new(0, 0, 0),
+                        VertexColor = Vector3.new(1, 1, 1),
+                        Name = [==[Mesh]==],
+                        ClassName = [==[SpecialMesh]==],
+                        Scale = Vector3.new(2, 1, 2),
+                        MeshId = [==[]==],
+                        MeshType = [==[Sphere]==],
+                        TextureId = [==[]==]
+                    },
+                    RightParamA = -0.5,
+                    Reflectance = 0.5,
+                    Color = Color3.new(0.0509804, 0.411765, 0.67451),
+                    Velocity = Vector3.new(-0.009927740320563316, 0.030587660148739815, -0.02649582549929619),
+                    RightSurface = [==[Smooth]==],
+                    RotVelocity = Vector3.new(0.03998387232422829, 0.0013752223458141088, 0.0665447860956192),
+                    Material = [==[Plastic]==],
+                    CFrame = CFrame.new(-97.9618988, 7.68663883, 93.6697693, -0.840201735, 3.7898717e-05, -0.542273939, 2.06459536e-05, 1, 3.78995683e-05, 0.542273939, 2.06475197e-05, -0.840201735),
+                    Size = Vector3.new(4, 2, 4),
+                    Friction = 0.30000001192092896,
+                    FrontSurface = [==[Smooth]==],
+                    BottomSurface = [==[Smooth]==],
+                    CanCollide = true,
+                    BackSurface = [==[Smooth]==],
+                    RightSurfaceInput = [==[NoInput]==],
+                    LeftSurfaceInput = [==[NoInput]==],
+                    LeftSurface = [==[Smooth]==],
+                    Elasticity = 0.5,
+                    Transparency = 0,
+                    Name = [==[Handle]==],
+                    ClassName = [==[Part]==],
+                    Orientation = Vector3.new(-0.0020000000949949026, -147.16099548339844, 0.0010000000474974513),
+                    LeftParamA = -0.5,
+                    Shape = [==[Block]==],
+                    TopSurface = [==[Smooth]==]
+                },
+                Grip = CFrame.new(1.5, -4, -1.37, 1, 0, 0, 0, 1, 0, 0, 0, 1),
+                CanBeDropped = true,
+                ClassName = [==[Tool]==],
+                RequiresHandle = true,
+                ToolTip = [==[]==],
+                Name = [==[Parachute]==],
+                TextureId = [==[]==]
+            },
+            {
+                {
+                    Disabled = true,
+                    Source = [==[ball = script.Parent
+
+damage = 25
+
+
+
+
+
+
+
+function onTouched(hit)
+
+	local humanoid = hit.Parent:findFirstChild("Humanoid")
+
+			-- make a splat
+
+	for i=1,3 do
+
+		local s = Instance.new("Part")
+
+		s.Shape = 1 -- block
+
+		s.formFactor = 2 -- plate
+
+		s.Size = Vector3.new(1,.4,1)
+
+		s.BrickColor = ball.BrickColor
+
+
+		
+
+	end
+
+	
+
+
+
+	if humanoid ~= nil then
+
+		tagHumanoid(humanoid)
+
+		humanoid.Health = humanoid.Health - damage
+
+		wait(2)
+
+		untagHumanoid(humanoid)
+
+	end
+
+
+
+	connection:disconnect()
+
+	ball.Parent = nil
+
+end
+
+
+
+function tagHumanoid(humanoid)
+
+	-- todo: make tag expire
+
+	local tag = ball:findFirstChild("creator")
+
+	if tag ~= nil then
+
+		local new_tag = tag:clone()
+
+		new_tag.Parent = humanoid
+
+	end
+
+end
+
+
+
+
+
+function untagHumanoid(humanoid)
+
+	if humanoid ~= nil then
+
+		local tag = humanoid:findFirstChild("creator")
+
+		if tag ~= nil then
+
+			tag.Parent = nil
+
+		end
+
+	end
+
+end
+
+
+
+connection = ball.Touched:connect(onTouched)
+
+
+
+wait(1.5)
+
+ball.Parent = nil]==],
+                    Name = [==[Paintball]==],
+                    ClassName = [==[Script]==]
+                },
+                {
+                    Disabled = false,
+                    Source = [==[Tool = script.Parent
+
+
+
+colors = {26,}
+
+
+
+function fire(v)
+
+
+
+	Tool.Handle.Fire:play()
+
+	
+
+
+
+	local vCharacter = Tool.Parent
+
+	local vPlayer = game.Players:playerFromCharacter(vCharacter)
+
+
+
+	local missile = Instance.new("Part")
+
+
+
+        
+
+
+
+	local spawnPos = vCharacter.PrimaryPart.Position
+
+	
+
+
+
+
+
+	spawnPos  = spawnPos + (v * 8)
+
+
+
+	missile.Position = spawnPos
+
+	missile.Size = Vector3.new(1,1,1)
+
+	missile.Velocity = v * 500
+
+	missile.BrickColor = BrickColor.new(colors[math.random(1, #colors)])
+
+	missile.Shape = 1
+
+	missile.BottomSurface = 0
+
+	missile.TopSurface = 0
+
+	missile.Name = "Paintball"
+
+	missile.Elasticity = 0
+
+	missile.Reflectance = .1
+
+	missile.Friction = .3
+
+
+
+	local force = Instance.new("BodyForce")
+
+	force.force = Vector3.new(0,200,0)
+
+	force.Parent = missile
+
+	
+
+	Tool.BrickCleanup:clone().Parent = missile
+
+
+
+	local new_script = script.Parent.Paintball:clone()
+
+	new_script.Disabled = false
+
+	new_script.Parent = missile
+
+
+
+	local creator_tag = Instance.new("ObjectValue")
+
+	creator_tag.Value = vPlayer
+
+	creator_tag.Name = "creator"
+
+	creator_tag.Parent = missile
+
+	
+
+
+
+
+
+	missile.Parent = game.Workspace
+
+
+
+end
+
+
+
+
+
+
+
+Tool.Enabled = true
+
+function onActivated()
+
+
+
+	if not Tool.Enabled then
+
+		return
+
+	end
+
+
+
+	Tool.Enabled = false
+
+	local character = Tool.Parent;
+
+	local humanoid = character.Humanoid
+
+	if humanoid == nil then
+
+		print("Humanoid not found")
+
+		return 
+
+	end
+
+
+
+	local targetPos = humanoid.TargetPoint
+
+	local lookAt = (targetPos - character.Head.Position).unit
+
+
+
+	fire(lookAt)
+
+
+
+	wait(.3)
+
+
+
+	Tool.Enabled = true
+
+end
+
+
+
+
+
+script.Parent.Activated:connect(onActivated)
+
+
+
+]==],
+                    Name = [==[PaintballShooter]==],
+                    ClassName = [==[Script]==]
+                },
+                {
+                    Disabled = true,
+                    Source = [==[-- this script removes its parent from the workspace after 24 seconds
+
+
+
+wait(1)
+
+script.Parent.Parent = nil]==],
+                    Name = [==[BrickCleanup]==],
+                    ClassName = [==[Script]==]
+                },
+                {
+                    {
+                        Offset = Vector3.new(0, 0, 0),
+                        VertexColor = Vector3.new(0.800000011920929, 0.8500000238418579, 1),
+                        Name = [==[Mesh]==],
+                        ClassName = [==[SpecialMesh]==],
+                        Scale = Vector3.new(0.5, 0.5, 0.5),
+                        MeshId = [==[]==],
+                        MeshType = [==[FileMesh]==],
+                        TextureId = [==[]==]
+                    },
+                    {
+                        PlaybackSpeed = 1,
+                        Volume = 1,
+                        Name = [==[EquipSound]==],
+                        ClassName = [==[Sound]==],
+                        SoundId = [==[http://www.roblox.com/asset/?id=13510737]==],
+                        RollOffMaxDistance = 10000,
+                        RollOffMode = [==[Inverse]==],
+                        RollOffMinDistance = 10
+                    },
+                    {
+                        PlaybackSpeed = 1,
+                        Volume = 1,
+                        Name = [==[Fire]==],
+                        ClassName = [==[Sound]==],
+                        SoundId = [==[http://www.roblox.com/asset/?id=13510352]==],
+                        RollOffMaxDistance = 10000,
+                        RollOffMode = [==[Inverse]==],
+                        RollOffMinDistance = 10
+                    },
+                    RightParamA = -0.5,
+                    Reflectance = 0,
+                    Color = Color3.new(0.105882, 0.164706, 0.207843),
+                    CFrame = CFrame.new(464, 2.08990741, -275.5, 5.36447369e-05, 4.31581502e-05, -1, -9.33151223e-10, 1, 4.31581502e-05, 0.99999994, -1.38205647e-09, 5.36447405e-05),
+                    RightSurface = [==[Smooth]==],
+                    RotVelocity = Vector3.new(0.0006741921533830464, -0.008326996117830276, -0.006375755183398724),
+                    Material = [==[Plastic]==],
+                    Velocity = Vector3.new(-0.00029823085060343146, 0.0031760348938405514, -0.0006669529248028994),
+                    Size = Vector3.new(1, 1, 2),
+                    Friction = 0.30000001192092896,
+                    BackSurface = [==[Smooth]==],
+                    RightSurfaceInput = [==[NoInput]==],
+                    CanCollide = true,
+                    FrontSurface = [==[Smooth]==],
+                    BottomSurface = [==[Smooth]==],
+                    LeftSurfaceInput = [==[NoInput]==],
+                    LeftSurface = [==[Smooth]==],
+                    Elasticity = 0.5,
+                    Transparency = 0,
+                    Name = [==[Handle]==],
+                    ClassName = [==[Part]==],
+                    Orientation = Vector3.new(-0.0020000000949949026, -89.99700164794922, 0),
+                    LeftParamA = -0.5,
+                    Shape = [==[Block]==],
+                    TopSurface = [==[Smooth]==]
+                },
+                Grip = CFrame.new(0, -0.200000003, -0.5, 1, 3.05171125e-05, -3.05180438e-05, -3.05180438e-05, 1, -3.05171125e-05, 3.05171125e-05, 3.05180438e-05, 1),
+                CanBeDropped = true,
+                ClassName = [==[Tool]==],
+                RequiresHandle = true,
+                ToolTip = [==[]==],
+                Name = [==[Pistol]==],
+                TextureId = [==[]==]
+            },
+            {
+                {
+                    {
+                        Disabled = true,
+                        Source = [==[local engine = script.Parent.Parent.Engine
+local spd = 1.3
+local position = engine.Position
+
+while true do
+	wait(.1)
+	direction = engine.CFrame.lookVector 
+	position = position + spd*3*direction
+	error = position - engine.Position
+	engine.Velocity = spd*error
+	engine.RotVelocity = Vector3.new(0, 0, 0)
+end 
+]==],
+                        Name = [==[FlyScript]==],
+                        ClassName = [==[Script]==]
+                    },
+                    Disabled = false,
+                    Source = [==[bin=script.Parent
+plane=nil
+hold=false
+local debounce = false
+local planedebounce = false
+local stuntdebounce = false
+local controlling = false
+
+function fire(pln,spn)
+	local missile = bin.Rocket:clone()
+	missile.CFrame = spn.CFrame * CFrame.new(0, 0, -30)
+
+	missile.RocketScript.Disabled = false
+	missile.Parent = game.Workspace
+
+	local creator_tag = Instance.new("ObjectValue")
+	creator_tag.Value = game.Players.LocalPlayer
+	creator_tag.Name = "creator"
+	creator_tag.Parent = missile
+
+	missile.Owner.Value = pln
+end
+
+function computeDirection(vec)
+	local lenSquared = vec.magnitude * vec.magnitude
+	local invSqrt = 1 / math.sqrt(lenSquared)
+	return Vector3.new(vec.x * invSqrt, vec.y * invSqrt, vec.z * invSqrt)
+end
+
+function move(target, engine)
+	local origincframe = engine:findFirstChild("BodyGyro").cframe
+	local dir = (target - engine.Position).unit
+	local spawnPos = engine.Position
+
+	local pos = spawnPos + (dir * 1)
+
+	engine:findFirstChild("BodyGyro").maxTorque = Vector3.new(9000, 9000, 9000)
+	engine:findFirstChild("BodyGyro").cframe = CFrame.new(pos,  pos + dir)
+	wait(0.1)
+	engine:findFirstChild("BodyGyro").maxTorque = Vector3.new(0, 0, 0)
+	engine:findFirstChild("BodyGyro").cframe = origincframe
+end
+
+function findPlane(player)
+	local list = player.Character:GetChildren()
+	for x = 1, #list do
+		if (list[x].Name == "Plane") then
+			local weld = list[x]:FindFirstChild("Parts"):FindFirstChild("Seat"):FindFirstChild("SeatWeld")
+			if (weld ~= nil) and (weld.Part1 == player.Character:FindFirstChild("Torso")) then
+				return list[x]
+			end
+		end
+	end
+	return nil
+end
+
+function onButton1Down(mouse)
+	local vehicle = findPlane(script.Parent.Parent.Parent)
+	if vehicle ~= nil and debounce == false and planedebounce == false then
+	debounce = true
+
+	controlling = true
+
+	while true do
+		wait()
+		local engine = vehicle.Parts.Engine
+		local position = mouse.Hit
+		local target = position.p
+		if engine:findFirstChild("FlyScript") ~= nil then
+		move(target, engine)
+		end
+		if planedebounce == true or
+		controlling == false then break end
+	end
+	wait(.1)
+	debounce = false
+	end
+end
+
+function onButton1Up(mouse)
+	controlling = false
+end
+
+function onSelected(mouse)
+	mouse.Icon = "rbxasset://textures\\GunCursor.png"
+	mouse.Button1Down:connect(function() onButton1Down(mouse) end)
+	mouse.Button1Up:connect(function() onButton1Up(mouse) end)
+	mouse.KeyDown:connect(onKeyDown)
+end
+
+function onKeyDown(key)
+	if (key~=nil) then
+		key = key:lower()
+		local vehicle = findPlane(script.Parent.Parent.Parent)
+		if (vehicle==nil) then return end
+		plane = vehicle.Parts
+		local engine = vehicle.Parts.Engine
+			if (key=="f") and (bin.Reload.Value == 0) then
+				fire(vehicle,plane.Gun1)
+				fire(vehicle,plane.Gun2)
+				bin.Reload.Value = 1
+				wait(1)
+				bin.Reload.Value = 0
+			end
+			if (key=="x") and planedebounce == false then
+				local power = plane.Engine:findFirstChild("FlyScript")
+				if (power ~= nil) then
+				power:remove()
+				end
+			end
+			if (key=="y") then
+				local power = plane.Engine:findFirstChild("FlyScript")
+				if (power ~= nil) then return end
+				local fly = script.FlyScript:clone()
+				fly.Disabled = false
+				fly.Parent = plane.Engine
+			end
+			if (key=="k") and planedebounce == false then
+				wait()
+				engine.RotVelocity = Vector3.new(0, engine.RotVelocity.y -0.7, 0)
+				wait()
+				engine.RotVelocity = Vector3.new(0, engine.RotVelocity.y -0.7, 0)
+				wait()
+				engine.RotVelocity = Vector3.new(0, engine.RotVelocity.y -0.7, 0)
+				wait()
+				engine.RotVelocity = Vector3.new(0, engine.RotVelocity.y -0.7, 0)
+			end
+			if (key=="h") and planedebounce == false then
+				wait()
+				engine.RotVelocity = Vector3.new(0, engine.RotVelocity.y +0.7, 0)
+				wait()
+				engine.RotVelocity = Vector3.new(0, engine.RotVelocity.y +0.7, 0)
+				wait()
+				engine.RotVelocity = Vector3.new(0, engine.RotVelocity.y +0.7, 0)
+				wait()
+				engine.RotVelocity = Vector3.new(0, engine.RotVelocity.y +0.7, 0)
+			return end
+			if (key=="j") and planedebounce == false then
+				local body = plane.Engine.BodyGyro
+				body.maxTorque = Vector3.new(9000, 9000, 9000)
+
+				local position = engine.CFrame * Vector3.new(0, 0.5, -4)
+				local dir = position - engine.Position
+
+				dir = computeDirection(dir)
+
+				local spawnPos = engine.Position
+
+				local pos = spawnPos + (dir * 8)
+
+				body.cframe = CFrame.new(pos,  pos + dir)
+				wait(.2)
+				body.maxTorque = Vector3.new(0, 0, 0)
+			end
+			if (key=="l") and planedebounce == false then
+				local body = plane.Engine.BodyGyro
+				body.maxTorque = Vector3.new(9000, 0, 0)
+				local frame = plane:FindFirstChild("OriginCFrame")
+				if frame ~= nil then
+					body.cframe = frame.Value
+				end
+				wait(0.1)
+				body.maxTorque = Vector3.new(0, 0, 0)
+			end
+			if (key=="u") and planedebounce == false then
+				local body = plane.Engine.BodyGyro
+				body.maxTorque = Vector3.new(9000, 9000, 9000)
+
+				local position = engine.CFrame * Vector3.new(0, -0.5, -4)
+				local dir = position - engine.Position
+
+				dir = computeDirection(dir)
+
+				local spawnPos = engine.Position
+
+				local pos = spawnPos + (dir * 8)
+
+				body.cframe = CFrame.new(pos,  pos + dir)
+				wait(.2)
+				body.maxTorque = Vector3.new(0, 0, 0)
+			end
+			if (key=="g") and planedebounce == false and stuntdebounce == false then
+				planedebounce = true
+				stuntdebounce = true
+				plane.Parent.Stunt.Value = 1
+				local body = plane.Engine.BodyGyro
+				body.maxTorque = Vector3.new(9000, 9000, 9000)
+
+				local currentframe = plane.Engine.CFrame
+
+				for i = 1,6 do
+				body.cframe = plane.Engine.CFrame * CFrame.fromEulerAnglesXYZ(0, 0, 30)
+				wait(.2)
+				end
+
+				body.cframe = currentframe
+				wait(.6)
+
+				body.maxTorque = Vector3.new(0, 0, 0)
+				planedebounce = false
+				plane.Parent.Stunt.Value = 0
+				wait(3)
+				stuntdebounce = false
+			end
+			if (key=="t") and planedebounce == false and stuntdebounce == false then
+				planedebounce = true
+				stuntdebounce = true
+				plane.Parent.Stunt.Value = 1
+				local body = plane.Engine.BodyGyro
+				body.maxTorque = Vector3.new(9000, 9000, 9000)
+
+				local currentframe = plane.Engine.CFrame
+				local valy = 30
+				local valz = 30
+
+				for i = 1,8 do
+				body.cframe = currentframe * CFrame.fromEulerAnglesXYZ(0, valy, valz)
+				valy = valy +50
+				valz = valz +100
+				wait(.1)
+				end
+
+				body.cframe = currentframe * CFrame.fromEulerAnglesXYZ(0, 600, 0)
+
+				wait(.5)
+
+				body.maxTorque = Vector3.new(0, 0, 0)
+				planedebounce = false
+				plane.Parent.Stunt.Value = 0
+				wait(4)
+				stuntdebounce = false
+			end
+	end
+end
+
+bin.Selected:connect(onSelected)
+]==],
+                    Name = [==[PlaneFlyer]==],
+                    ClassName = [==[Script]==]
+                },
+                {
+                    Value = 0,
+                    Name = [==[Reload]==],
+                    ClassName = [==[IntValue]==]
+                },
+                {
+                    {
+                        RollOffMode = [==[Inverse]==],
+                        Looped = true,
+                        PlaybackSpeed = 1,
+                        Name = [==[Swoosh]==],
+                        Volume = 0.699999988079071,
+                        SoundId = [==[rbxasset://sounds/Rocket whoosh 01.wav]==],
+                        ClassName = [==[Sound]==],
+                        RollOffMaxDistance = 10000,
+                        RollOffMinDistance = 10
+                    },
+                    {
+                        PlaybackSpeed = 1,
+                        Volume = 1,
+                        Name = [==[Explosion]==],
+                        ClassName = [==[Sound]==],
+                        SoundId = [==[rbxasset://sounds/collide.wav]==],
+                        RollOffMaxDistance = 10000,
+                        RollOffMode = [==[Inverse]==],
+                        RollOffMinDistance = 10
+                    },
+                    {
+                        Disabled = true,
+                        Source = [==[r = game:service("RunService")
+
+shaft = script.Parent
+position = shaft.Position
+
+function fly()
+	direction = shaft.CFrame.lookVector 
+	position = position + 35*direction
+	error = position - shaft.Position
+	shaft.Velocity = 5*error
+end
+
+function blow()
+	swoosh:stop()
+	explosion = Instance.new("Explosion")
+	explosion.Position = shaft.Position
+	explosion.BlastRadius = 10
+
+	-- find instigator tag
+	local creator = script.Parent:findFirstChild("creator")
+	if creator ~= nil then
+		explosion.Hit:connect(function(part, distance)  onPlayerBlownUp(part, distance, creator) end)
+	end
+
+	explosion.Parent = game.Workspace
+	connection:disconnect()
+	wait(.1)
+	shaft:remove()
+end
+
+function onTouch(hit)
+	if hit.Name == "Building" or
+	hit.Name == "Safe" then
+		swoosh:stop()
+		shaft:remove()
+	return end
+
+	local parent = hit.Parent.Parent
+	local owner = shaft.Owner
+	if owner ~= nil then
+		if parent ~= nil and owner.Value ~= nil then
+			if parent ~= owner.Value then
+				local stunt = parent:FindFirstChild("Stunt")
+				if stunt ~= nil then
+					if stunt.Value ~= 1 then
+						blow()
+					end
+				else
+					blow()
+				end
+			end
+		end
+	end
+end
+
+function onPlayerBlownUp(part, distance, creator)
+	if part.Name == "Head" then
+		local humanoid = part.Parent:findFirstChild("Humanoid")
+		tagHumanoid(humanoid, creator)
+	end
+end
+
+function tagHumanoid(humanoid, creator)
+	if creator ~= nil then
+		local new_tag = creator:clone()
+		new_tag.Parent = humanoid
+	end
+end
+
+function untagHumanoid(humanoid)
+	if humanoid ~= nil then
+		local tag = humanoid:findFirstChild("creator")
+		if tag ~= nil then
+			tag.Parent = nil
+		end
+	end
+end
+
+t, s = r.Stepped:wait()
+
+swoosh = script.Parent.Swoosh
+swoosh:play()
+
+d = t + 4.0 - s
+connection = shaft.Touched:connect(onTouch)
+
+while t < d do
+	fly()
+	t = r.Stepped:wait()
+end
+
+-- at max range
+script.Parent.Explosion.PlayOnRemove = false
+swoosh:stop()
+shaft:remove()
+]==],
+                        Name = [==[RocketScript]==],
+                        ClassName = [==[Script]==]
+                    },
+                    {
+                        Name = [==[Owner]==],
+                        ClassName = [==[ObjectValue]==]
+                    },
+                    {
+                        Offset = Vector3.new(0, 0, 0),
+                        VertexColor = Vector3.new(1, 1, 1),
+                        Name = [==[Mesh]==],
+                        ClassName = [==[SpecialMesh]==],
+                        Scale = Vector3.new(0.5, 0.5, 0.5),
+                        MeshId = [==[http://roblox.com/asset/?id=2251534]==],
+                        MeshType = [==[FileMesh]==],
+                        TextureId = [==[]==]
+                    },
+                    RightParamA = -0.5,
+                    Reflectance = 0.20000000298023224,
+                    Color = Color3.new(0.105882, 0.164706, 0.207843),
+                    Velocity = Vector3.new(0, 0, 0),
+                    RightSurface = [==[Smooth]==],
+                    RotVelocity = Vector3.new(0, 0, 0),
+                    Material = [==[Plastic]==],
+                    Size = Vector3.new(1, 1, 2),
+                    Friction = 0.30000001192092896,
+                    BackSurface = [==[Smooth]==],
+                    BottomSurface = [==[Smooth]==],
+                    CFrame = CFrame.new(-0.5, 7.4000001, 0, 0, 1, 0, 1, 0, 0, 0, 0, -1),
+                    FrontSurface = [==[Smooth]==],
+                    RightSurfaceInput = [==[NoInput]==],
+                    LeftSurfaceInput = [==[NoInput]==],
+                    LeftSurface = [==[Smooth]==],
+                    Elasticity = 0.5,
+                    Transparency = 0,
+                    Name = [==[Rocket]==],
+                    ClassName = [==[Part]==],
+                    Orientation = Vector3.new(0, 180, 90),
+                    LeftParamA = -0.5,
+                    Shape = [==[Block]==],
+                    TopSurface = [==[Smooth]==]
+                },
+                TextureId = [==[]==],
+                BinType = [==[Script]==],
+                Name = [==[Helicopter]==],
+                ClassName = [==[HopperBin]==]
+            },
+            {
+                {
+                    {
+                        Disabled = true,
+                        Source = [==[local engine = script.Parent.Parent.Engine
+local spd = 0
+local position = engine.Position
+
+while true do
+	wait(0.1)
+	direction = engine.CFrame.lookVector 
+	position = position + spd*0*direction
+	error = position - engine.Position
+	engine.Velocity = spd*error
+	engine.RotVelocity = Vector3.new(0, 0, 0)
+end 
+]==],
+                        Name = [==[FlyScript]==],
+                        ClassName = [==[Script]==]
+                    },
+                    Disabled = false,
+                    Source = [==[bin=script.Parent
+speed= 2
+plane=nil
+hold=false
+local debounce = false
+local planedebounce = false
+local stuntdebounce = false
+local controlling = false
+
+
+function fire(pln,spn)
+	local missile = bin.Rocket:clone()
+	missile.CFrame = spn.CFrame * CFrame.new(0, 0, -35)
+
+	missile.RocketScript.Disabled = false
+	missile.Parent = game.Workspace
+
+	local creator_tag = Instance.new("ObjectValue")
+	creator_tag.Value = game.Players.LocalPlayer
+	creator_tag.Name = "creator"
+	creator_tag.Parent = missile
+
+	missile.Owner.Value = pln
+end
+
+
+function computeDirection(vec)
+	local lenSquared = vec.magnitude * vec.magnitude
+	local invSqrt = 1 / math.sqrt(lenSquared)
+	return Vector3.new(vec.x * invSqrt, vec.y * invSqrt, vec.z * invSqrt)
+end
+
+function move(target, engine)
+	local origincframe = engine:findFirstChild("BodyGyro").cframe
+	local dir = (target - engine.Position).unit
+	local spawnPos = engine.Position
+
+	local pos = spawnPos + (dir * 1)
+
+	engine:findFirstChild("BodyGyro").maxTorque = Vector3.new(9000, 9000, 9000)
+	engine:findFirstChild("BodyGyro").cframe = CFrame.new(pos,  pos + dir)
+	wait(0.1)
+	engine:findFirstChild("BodyGyro").maxTorque = Vector3.new(0, 0, 0)
+	engine:findFirstChild("BodyGyro").cframe = origincframe
+end
+
+function findPlane(player)
+	local list = player.Character:GetChildren()
+	for x = 1, #list do
+		if (list[x].Name == "Plane") then
+			local weld = list[x]:FindFirstChild("Parts"):FindFirstChild("Seat"):FindFirstChild("SeatWeld")
+			if (weld ~= nil) and (weld.Part1 == player.Character:FindFirstChild("Torso")) then
+				return list[x]
+			end
+		end
+	end
+	return nil
+end
+
+function onButton1Down(mouse)
+	homingtarget = mouse.Target
+
+	local vehicle = findPlane(script.Parent.Parent.Parent)
+	if vehicle ~= nil and debounce == false and planedebounce == false then
+	debounce = true
+
+	controlling = true
+
+	while true do
+		wait()
+		local engine = vehicle.Parts.Engine
+		local position = mouse.Hit
+		local target = position.p
+		if engine:findFirstChild("FlyScript") ~= nil then
+		move(target, engine)
+		end
+		if planedebounce == true or
+		controlling == false then break end
+	end
+	wait(.1)
+	debounce = false
+	end
+end
+
+function onButton1Up(mouse)
+	controlling = false
+end
+
+function onSelected(mouse)
+	mouse.Icon = "rbxasset://textures\\GunCursor.png"
+	mouse.Button1Down:connect(function() onButton1Down(mouse) end)
+	mouse.Button1Up:connect(function() onButton1Up(mouse) end)
+	mouse.KeyDown:connect(onKeyDown)
+end
+
+function onKeyDown(key)
+	if (key~=nil) then
+		key = key:lower()
+		local vehicle = findPlane(script.Parent.Parent.Parent)
+		if (vehicle==nil) then return end
+		plane = vehicle.Parts
+		local engine = vehicle.Parts.Engine
+		local r1 = engine.Parent.r1
+		local r2 = engine.Parent.r2
+		local l1 = engine.Parent.l1
+		local l2 = engine.Parent.l2
+			if (key=="k") and planedebounce == false then
+				wait()
+				engine.RotVelocity = Vector3.new(0, engine.RotVelocity.y -0.7, 0)
+				wait()
+				engine.RotVelocity = Vector3.new(0, engine.RotVelocity.y -0.7, 0)
+				wait()
+				engine.RotVelocity = Vector3.new(0, engine.RotVelocity.y -0.7, 0)
+				wait()
+				engine.RotVelocity = Vector3.new(0, engine.RotVelocity.y -0.7, 0)
+			end
+
+			if (key=="f") and (bin.Reload.Value == 0) then
+				fire(vehicle,plane.MachineGun1)
+				bin.Reload.Value = 1
+				wait(0.2)
+				bin.Reload.Value = 0
+			end
+			if (key=="x") and planedebounce == false then
+				local power = plane.Engine:findFirstChild("FlyScript")
+				if (power ~= nil) then
+				power:remove()
+				end
+				r1.RightParamB= 0
+				r1.RightParamA= 0	
+				r2.RightParamB= 0
+				r2.RightParamA= 0	
+				l1.RightParamB= 0
+				l1.RightParamA= 0
+				l2.RightParamB= 0
+				l2.RightParamA= 0
+			end
+			if (key=="y") then
+				local power = plane.Engine:findFirstChild("FlyScript")
+				if (power ~= nil) then return end
+				local fly = script.FlyScript:clone()
+				fly.Disabled = true
+				fly.Parent = plane.Engine
+				r1.RightParamB= speed*-1
+				r1.RightParamA= speed	
+				r2.RightParamB= speed*-1
+				r2.RightParamA= speed	
+				l1.RightParamB= speed
+				l1.RightParamA= speed*-1
+				l2.RightParamB= speed
+				l2.RightParamA= speed*-1
+			end
+			if (key=="k") and planedebounce == false then
+				wait()
+				engine.RotVelocity = Vector3.new(0, engine.RotVelocity.y -0.7, 0)
+				wait()
+				engine.RotVelocity = Vector3.new(0, engine.RotVelocity.y -0.7, 0)
+				wait()
+				engine.RotVelocity = Vector3.new(0, engine.RotVelocity.y -0.7, 0)
+				wait()
+				engine.RotVelocity = Vector3.new(0, engine.RotVelocity.y -0.7, 0)
+			end
+			if (key=="h") and planedebounce == false then
+				wait()
+				engine.RotVelocity = Vector3.new(0, engine.RotVelocity.y +0.7, 0)
+				wait()
+				engine.RotVelocity = Vector3.new(0, engine.RotVelocity.y +0.7, 0)
+				wait()
+				engine.RotVelocity = Vector3.new(0, engine.RotVelocity.y +0.7, 0)
+				wait()
+				engine.RotVelocity = Vector3.new(0, engine.RotVelocity.y +0.7, 0)
+			return end
+			if (key=="j") and planedebounce == false then
+				local body = plane.Engine.BodyGyro
+				body.maxTorque = Vector3.new(9000, 9000, 9000)
+
+				local position = engine.CFrame * Vector3.new(0, 0.5, -4)
+				local dir = position - engine.Position
+
+				dir = computeDirection(dir)
+
+				local spawnPos = engine.Position
+
+				local pos = spawnPos + (dir * 8)
+
+				body.cframe = CFrame.new(pos,  pos + dir)
+				wait(.2)
+				body.maxTorque = Vector3.new(0, 0, 0)
+			end
+			if (key=="l") and planedebounce == false then
+				local body = plane.Engine.BodyGyro
+				body.maxTorque = Vector3.new(9000, 0, 0)
+				local frame = plane:FindFirstChild("OriginCFrame")
+				if frame ~= nil then
+					body.cframe = frame.Value
+				end
+				wait(0.1)
+				body.maxTorque = Vector3.new(0, 0, 0)
+			end
+			if (key=="u") and planedebounce == false then
+				local body = plane.Engine.BodyGyro
+				body.maxTorque = Vector3.new(9000, 9000, 9000)
+
+				local position = engine.CFrame * Vector3.new(0, -0.5, -4)
+				local dir = position - engine.Position
+
+				dir = computeDirection(dir)
+
+				local spawnPos = engine.Position
+
+				local pos = spawnPos + (dir * 8)
+
+				body.cframe = CFrame.new(pos,  pos + dir)
+				wait(.2)
+				body.maxTorque = Vector3.new(0, 0, 0)
+			end
+			if (key=="g") and planedebounce == false and stuntdebounce == false then
+				planedebounce = true
+				stuntdebounce = true
+				plane.Parent.Stunt.Value = 1
+				local body = plane.Engine.BodyGyro
+				body.maxTorque = Vector3.new(9000, 9000, 9000)
+
+				local currentframe = plane.Engine.CFrame
+
+				for i = 1,6 do
+				body.cframe = plane.Engine.CFrame * CFrame.fromEulerAnglesXYZ(0, 0, 30)
+				wait(.2)
+				end
+
+				body.cframe = currentframe
+				wait(.6)
+
+				body.maxTorque = Vector3.new(0, 0, 0)
+				planedebounce = false
+				plane.Parent.Stunt.Value = 0
+				wait(3)
+				stuntdebounce = false
+			end
+			if (key=="t") and planedebounce == false and stuntdebounce == false then
+				planedebounce = true
+				stuntdebounce = true
+				plane.Parent.Stunt.Value = 1
+				local body = plane.Engine.BodyGyro
+				body.maxTorque = Vector3.new(9000, 9000, 9000)
+
+				local currentframe = plane.Engine.CFrame
+				local valy = 30
+				local valz = 30
+
+				for i = 1,8 do
+				body.cframe = currentframe * CFrame.fromEulerAnglesXYZ(0, valy, valz)
+				valy = valy +50
+				valz = valz +100
+				wait(.1)
+				end
+
+				body.cframe = currentframe * CFrame.fromEulerAnglesXYZ(0, 600, 0)
+
+				wait(.5)
+
+				body.maxTorque = Vector3.new(0, 0, 0)
+				planedebounce = false
+				plane.Parent.Stunt.Value = 0
+				wait(4)
+				stuntdebounce = false
+			end
+			if (key=="b") then-- Backwards
+				r1.RightParamB= speed
+				r1.RightParamA= speed*-1	
+				r2.RightParamB= speed
+				r2.RightParamA= speed*-1	
+				l1.RightParamB= speed*-1
+				l1.RightParamA= speed
+				l2.RightParamB= speed*-1
+				l2.RightParamA= speed					
+			end
+			if (key=="d") and planedebounce == false then
+				wait()
+				engine.BodyGyro.maxTorque = Vector3.new(9000, 9000, 9000)
+				engine.Velocity = Vector3.new(0, 50, 0)
+				wait(1)
+				engine.BodyGyro.maxTorque = Vector3.new(0, 0, 0)
+				engine.Velocity = Vector3.new(0, 0, 0)
+			end
+	end
+end
+
+bin.Selected:connect(onSelected)
+]==],
+                    Name = [==[PlaneFlyer]==],
+                    ClassName = [==[Script]==]
+                },
+                {
+                    Value = 0,
+                    Name = [==[Reload]==],
+                    ClassName = [==[IntValue]==]
+                },
+                {
+                    {
+                        RollOffMode = [==[Inverse]==],
+                        Looped = true,
+                        PlaybackSpeed = 1,
+                        Name = [==[Swoosh]==],
+                        Volume = 0.699999988079071,
+                        SoundId = [==[http://www.roblox.com/asset/?id=12222095]==],
+                        ClassName = [==[Sound]==],
+                        RollOffMaxDistance = 10000,
+                        RollOffMinDistance = 10
+                    },
+                    {
+                        PlaybackSpeed = 1,
+                        Volume = 1,
+                        Name = [==[Explosion]==],
+                        ClassName = [==[Sound]==],
+                        SoundId = [==[rbxasset://sounds/collide.wav]==],
+                        RollOffMaxDistance = 10000,
+                        RollOffMode = [==[Inverse]==],
+                        RollOffMinDistance = 10
+                    },
+                    {
+                        Name = [==[Owner]==],
+                        ClassName = [==[ObjectValue]==]
+                    },
+                    {
+                        Disabled = true,
+                        Source = [==[r = game:service("RunService")
+
+shaft = script.Parent
+position = shaft.Position
+
+function fly()
+	direction = shaft.CFrame.lookVector 
+	position = position + 42*direction
+	error = position - shaft.Position
+	shaft.Velocity = 5*error
+end
+
+function onTouch(hit)
+	if hit.Name == "Building" or
+	hit.Name == "Safe" then
+		swoosh:stop()
+		shaft:remove()
+	return end
+
+	local parent = hit.Parent.Parent
+	local owner = shaft.Owner
+	if owner ~= nil then
+		if parent ~= nil and owner.Value ~= nil then
+			if parent ~= owner.Value then
+				local stunt = parent:FindFirstChild("Stunt")
+				if stunt ~= nil then
+					if stunt.Value ~= 1 then
+						blow()
+					end
+				else
+					blow()
+				end
+			end
+		end
+	end
+end
+
+function onPlayerBlownUp(part, distance, creator)
+	if part.Name == "Head" then
+		local humanoid = part.Parent:findFirstChild("Humanoid")
+		tagHumanoid(humanoid, creator)
+	end
+end
+
+function tagHumanoid(humanoid, creator)
+	if creator ~= nil then
+		local new_tag = creator:clone()
+		new_tag.Parent = humanoid
+	end
+end
+
+function untagHumanoid(humanoid)
+	if humanoid ~= nil then
+		local tag = humanoid:findFirstChild("creator")
+		if tag ~= nil then
+			tag.Parent = nil
+		end
+	end
+end
+
+t, s = r.Stepped:wait()
+
+swoosh = script.Parent.Swoosh
+swoosh:play()
+
+d = t + 1.5 - s
+connection = shaft.Touched:connect(onTouch)
+
+while t < d do
+	fly()
+	t = r.Stepped:wait()
+end
+
+-- at max range
+script.Parent.Explosion.PlayOnRemove = false
+swoosh:stop()
+shaft:remove()
+]==],
+                        Name = [==[RocketScript]==],
+                        ClassName = [==[Script]==]
+                    },
+                    {
+                        Disabled = false,
+                        Source = [==[function onTouched(part)
+	local h = part.Parent:findFirstChild("Humanoid")
+	if h~=nil then
+		h.Health = h.Health - 40
+	end
+end
+
+script.Parent.Touched:connect(onTouched)
+]==],
+                        Name = [==[Script]==],
+                        ClassName = [==[Script]==]
+                    },
+                    RightParamA = -0.5,
+                    Reflectance = 0.5,
+                    Color = Color3.new(0.105882, 0.164706, 0.207843),
+                    Velocity = Vector3.new(0, 0, 0),
+                    RightSurface = [==[Smooth]==],
+                    RotVelocity = Vector3.new(0, 0, 0),
+                    Material = [==[Plastic]==],
+                    Size = Vector3.new(1, 1, 1),
+                    Friction = 0.30000001192092896,
+                    BackSurface = [==[Smooth]==],
+                    BottomSurface = [==[Smooth]==],
+                    CFrame = CFrame.new(-0.5, 7.4000001, 0, 0, 1, 0, 1, 0, 0, 0, 0, -1),
+                    FrontSurface = [==[Smooth]==],
+                    RightSurfaceInput = [==[NoInput]==],
+                    LeftSurfaceInput = [==[NoInput]==],
+                    LeftSurface = [==[Smooth]==],
+                    Elasticity = 0.5,
+                    Transparency = 0,
+                    Name = [==[Rocket]==],
+                    ClassName = [==[Part]==],
+                    Orientation = Vector3.new(0, 180, 90),
+                    LeftParamA = -0.5,
+                    Shape = [==[Ball]==],
+                    TopSurface = [==[Smooth]==]
+                },
+                TextureId = [==[]==],
+                BinType = [==[Script]==],
+                Name = [==[Jeep]==],
+                ClassName = [==[HopperBin]==]
+            },
+            {
+                {
+                    Disabled = false,
+                    Source = [==[bin = script.Parent
+print("Reset tool")
+
+function onButton1Down(mouse)
+	local player = game.Players.LocalPlayer
+	local health = player.Character.Humanoid.Health
+	if player == nil then return end
+	player.Character.Humanoid.Health = health - 100
+end
+
+function onSelected(mouse)
+ mouse.Button1Down:connect(function() onButton1Down(mouse) end)
+end
+
+bin.Selected:connect(onSelected)
+
+--[[
+Do not erase these words!
+This Fake Reset Tool was made by Wirodeu
+Profile page: http://www.roblox.com/User.aspx?ID=145417
+Blog: www.robloxjuice.wordpress.com
+--]]]==],
+                    Name = [==[Reset Script]==],
+                    ClassName = [==[Script]==]
+                },
+                TextureId = [==[]==],
+                BinType = [==[Script]==],
+                Name = [==[Reset]==],
+                ClassName = [==[HopperBin]==]
+            }
         },
         Name = [==[Game]==],
         ClassName = [==[DataModel]==]
