@@ -608,7 +608,7 @@ function onTouched(part)
 	warn(sound)
 	sound:play()
 
-	head.Victory:Play()
+	--head.Victory:Play()
 end
 
 script.Parent.Touched:connect(onTouched)]==],
