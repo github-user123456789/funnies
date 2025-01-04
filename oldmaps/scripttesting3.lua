@@ -603,8 +603,12 @@ script.Parent.Touched:connect(onTouched)]==],
 local head = script.Parent
 
 function onTouched(part)
+	warn(head)
 	local sound = head:FindFirstChild("Victory")
+	warn(sound)
 	sound:play()
+
+	head.Victory:Play()
 end
 
 script.Parent.Touched:connect(onTouched)]==],
